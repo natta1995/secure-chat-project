@@ -1,0 +1,124 @@
+body {
+    background-color: rgb(213, 188, 169);
+    padding-left: 19%;
+}
+
+h1 {
+    padding: 0%;
+    text-align: center;
+    margin: 0%;
+    font-size: 120%;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 2%;
+    color: rgb(85, 52, 52);
+}
+
+h4{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: rgb(85, 52, 52);
+    padding-bottom: 1%;
+    margin-bottom: 0%;
+}
+
+li {
+   color: rgb(6, 6, 6);
+    list-style-type: none;
+    font-size: 50%;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+
+main {
+    background-color: rgb(243, 244, 239);
+    margin: 2%;
+    width: 70%;
+    border: 2px solid rgb(100, 70, 70);
+    border-radius: 25px;
+}
+
+#getChat1 {
+    margin-top: 4%;
+    margin-left: 2%;
+    font-size: 50%;
+    margin-right: 2%;
+}
+
+#getChat2 {
+    margin-top: 2%;
+    margin-left: 2%;
+    font-size: 50%;
+    margin-right: 2%;
+}
+
+
+.form-container {
+    margin: 2%;
+    padding: 2%;
+    margin-top: 0%;
+}
+
+.form-container2 {
+    margin: 2%;
+    padding: 2%;
+}
+
+#text1 {
+    font-size: 50%;
+}
+
+#text2 {
+    font-size: 50%;
+}
+
+#send-message{
+ font-size: 50%;
+}
+
+
+#send-message2{
+    font-size: 50%;
+}
+
+
+#pub-pri{
+    margin-left: 10%;
+    
+}
+
+#auth {
+    display: flex;
+	flex-direction: column;
+    width: 30%;
+    padding: 2%;
+    padding-left: 65%;
+    font-size: 50%;
+}
+
+#chat1 {
+    display: flex;
+    flex-direction: column;
+}
+
+#chat2 {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 50%;
+    padding-top: 0%;
+    margin-top: 0%;
+}
+
+#h4public{
+    color: green;
+}
+#h4private{
+    color: red;
+}

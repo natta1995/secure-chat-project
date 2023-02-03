@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure chat</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main>
+
+        <h1> Secure Chat </h1>
+
+        <div id="chat2">
+
+        <h4 id="h4public"> Public chat </h4>
+        <p> Här kan du chatta som gäst eller som inloggad </p>
+
+        <button id="getChat1"> See Public chat  </button>
+
+        <ul class="chat-history">
+
+        </ul>
+
+        <div class="form-container">
+            <input type="text" id="text1" placeholder="Skriv här..."/>
+            <button id="send-message"> Skicka meddelande</button>
+        </div>
+
+        </div>
+
+        <div id="chat2">
+
+        <h4 id="h4private"> Private chat </h4>
+        <p> Här kan du BARA chatta om du är inloggad </p>
+
+        <button id="getChat2" disabled> See Private chat </button>
+    
+        <ul class="chat-history2">
+
+        </ul>
+
+            <div class="form-container2">
+                <input type="text" id="text2" placeholder="Skriv här..."/>
+                <button id="send-message2" disabled> Skicka meddelande</button>
+            </div>
+
+        </div>
+
+        <div id="auth">
+
+            <label>Användarnamn:</label>
+            <input id="userName" type="text" value="Natalie" />
+
+            <label>Lösenord:</label>
+		    <input id="password" type="password" value="hund">
+
+			<button id="logIn"> Logga in </button>
+            <button id="logOut" disabled> Logga ut </button>
+    </div>
+
+    </main>
+
+  
+
+</body>
+</html>
