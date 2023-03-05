@@ -54,7 +54,7 @@ login.addEventListener('click', async () => {
         localStorage.setItem(JWT_KEY, userToken.token)
         isLoggedin = true
     } else {
-        alert('Bad login credentials');
+        console.log('Bad login credentials');
     }
     uppdateLogginStatus()
 })
@@ -76,7 +76,7 @@ async function getMessagePrivate() {
         }
         privateData = await response.json()
     } catch(error) {
-        alert('something whent wrong! ' + error.message)
+        console.log('Error')
     }
 
     chatHistoryPrivate.innerHTML = ''
@@ -142,12 +142,12 @@ async function getMessagePublic() {
     try {
         const response = await fetch('/public/message')
         if ( response.status !== 200 ){
-            alert('Could not find server: ', response.status)
+            console.log('Could not found')
             return
         }
         publicData = await response.json()
     } catch(error) {
-        alert('something whent wrong! ' + error.message)
+        console.log('something whent wrong')
     }
 
     chatHistory.innerHTML = ''

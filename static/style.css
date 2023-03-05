@@ -5,12 +5,13 @@ body {
 
 h1 {
     padding: 0%;
-    text-align: center;
     margin: 0%;
-    font-size: 120%;
+    font-size: 250%;
     font-family: Arial, Helvetica, sans-serif;
     padding-top: 2%;
     color: rgb(85, 52, 52);
+    text-align: center;
+    margin-right: 25%;
 }
 
 h4{
@@ -19,12 +20,13 @@ h4{
     color: rgb(85, 52, 52);
     padding-bottom: 1%;
     margin-bottom: 0%;
+    font-size: 250%;
 }
 
 li {
    color: rgb(6, 6, 6);
     list-style-type: none;
-    font-size: 50%;
+    font-size: 100%;
     font-weight: bold;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -43,14 +45,14 @@ main {
 #getChat1 {
     margin-top: 4%;
     margin-left: 2%;
-    font-size: 50%;
+    font-size: 100%;
     margin-right: 2%;
 }
 
 #getChat2 {
     margin-top: 2%;
     margin-left: 2%;
-    font-size: 50%;
+    font-size: 100%;
     margin-right: 2%;
 }
 
@@ -59,28 +61,30 @@ main {
     margin: 2%;
     padding: 2%;
     margin-top: 0%;
+    font-size: 100%;
 }
 
 .form-container2 {
     margin: 2%;
     padding: 2%;
+
 }
 
 #text1 {
-    font-size: 50%;
+    font-size: 100%;
 }
 
 #text2 {
-    font-size: 50%;
+    font-size: 100%;
 }
 
 #send-message{
- font-size: 50%;
+ font-size: 100%;
 }
 
 
 #send-message2{
-    font-size: 50%;
+    font-size: 100%;
 }
 
 
@@ -93,9 +97,24 @@ main {
     display: flex;
 	flex-direction: column;
     width: 30%;
+    height: auto;
     padding: 2%;
-    padding-left: 65%;
-    font-size: 50%;
+    padding-left: 60%;
+    font-size: 120%;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+#auth input {
+    font-size: 100%;
+}
+
+#logIn {
+    font-size: 100%;
+}
+
+#logOut{
+    font-size: 100%;
 }
 
 #chat1 {
@@ -111,7 +130,7 @@ main {
 p {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    font-size: 50%;
+    font-size: 100%;
     padding-top: 0%;
     margin-top: 0%;
 }
