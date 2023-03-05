@@ -1,4 +1,3 @@
-//import { question } from 'readline-sync'
 const addMessage = document.querySelector('#send-message')
 const chatInput = document.querySelector('.form-container input')
 const chatHistory = document.querySelector('.chat-history')
@@ -12,10 +11,21 @@ const logout = document.querySelector('#logOut')
 const inputUsername = document.querySelector('#userName')
 const inputPassword = document.querySelector('#password')
 
+const key = "secure-chat"
+
+// LOG IN & LOG OUT FUNCTIONS HERE !!!!
 
 const JWT_KEY = 'secure-chat-login'
 let isLoggedin = false
 
+const token = localStorage.getItem(JWT_KEY)
+if (token) {
+    isLoggedin = true;
+} else {
+    isLoggedin = false;
+}
+
+uppdateLogginStatus();
 
 function uppdateLogginStatus(){
     login.disabled = isLoggedin
@@ -40,24 +50,23 @@ login.addEventListener('click', async () => {
     
     const response = await fetch('/login', options)
     if( response.status === 200 ){
-        console.log('You are logged in')
         const userToken = await response.json()
-        console.log('Usertoken', userToken)
         localStorage.setItem(JWT_KEY, userToken.token)
         isLoggedin = true
     } else {
-        console.log("fail" + response.status)
+        alert('Bad login credentials');
     }
     uppdateLogginStatus()
 })
 
 logout.addEventListener('click', () => {
+    localStorage.removeItem(JWT_KEY);
     window.location.reload()
 })
 
+// LOG IN & LOG OUT STOP !!!!
 
-async function getMessages() {
-
+async function getMessagePrivate() {
     let privateData = null
     try {
         const response = await fetch('/private/message')
@@ -66,22 +75,91 @@ async function getMessages() {
             return
         }
         privateData = await response.json()
-        console.log('data from server ', privateData)
     } catch(error) {
-        console.log('something whent wrong! ' + error.message)
+        alert('something whent wrong! ' + error.message)
     }
 
     chatHistoryPrivate.innerHTML = ''
 
     privateData.forEach(messages => {
-
         let li = document.createElement('li')
         li.innerText = `${messages.chatName} ${messages.chatMessage}`
         chatHistoryPrivate.appendChild(li)
     })
-
 }
-startChatprivate.addEventListener('click', getMessages)
+startChatprivate.addEventListener('click', getMessagePrivate)
+
+addMessage.addEventListener('click', addMessagePublic)
+addMessage2.addEventListener('click', addMessagePrivate)
+
+let nextMessageId = 4
+
+function addMessagePublic() {
+    const valueFromUser = chatInput.value
+            
+    const newMessage = {
+        chatName: userId() + " ",
+        chatMessage: valueFromUser,
+        id: nextMessageId
+    }
+    nextMessageId++
+        
+    const element = createChatElement(newMessage)
+    chatHistory.appendChild(element)
+    fetch('/public/message', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newMessage)
+    })
+}
+
+function addMessagePrivate() {
+    const valueFromUser = chatInput2.value
+   
+    const newMessage = {
+        chatName: userId() + " ",
+        chatMessage: valueFromUser,
+        id: nextMessageId
+    }
+    nextMessageId++
+    
+    const element = createChatElement(newMessage)
+    chatHistoryPrivate.appendChild(element)
+    fetch('/private/message', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newMessage)
+    })
+}
+
+async function getMessagePublic() {
+
+    let publicData = null
+    try {
+        const response = await fetch('/public/message')
+        if ( response.status !== 200 ){
+            alert('Could not find server: ', response.status)
+            return
+        }
+        publicData = await response.json()
+    } catch(error) {
+        alert('something whent wrong! ' + error.message)
+    }
+
+    chatHistory.innerHTML = ''
+
+    publicData.forEach(message => {
+        let li = document.createElement('li')
+        li.innerText = `${message.chatName} ${message.chatMessage}`
+        chatHistory.appendChild(li)
+    })
+}
+
+startChatPublic.addEventListener('click', getMessagePublic)
 
 function userId(){
     let userId 
@@ -93,111 +171,6 @@ function userId(){
     return userId
 }
 
-
-addMessage2.addEventListener('click', async () => {
-    const valueFromUser = chatInput2.value
-
-   
-        const newMessages = {
-            chatName: userId() + " ",
-            chatMessage: valueFromUser,
-            id: nextMessageId
-        }
-        nextMessageId++
-    
-        const element = createChatElement(newMessages)
-        chatHistoryPrivate.appendChild(element)
-    
-       
-    })
-    
-    function createChatElement(newMessages) {
-        const element = document.createElement('li')
-        const label = document.createElement('label')
-        const span = document.createElement('span')
-        label.innerText = newMessages.chatName
-        span.innerText = newMessages.chatMessage + "  Skickat:  " + Date()
-    
-        label.appendChild(span).style.color = "black"
-        element.appendChild(label)
-        return element
-    }
-
-
-
-//const key = 'secure-chat'
-let nextMessageId = 4
-
-
-async function getMessage() {
-
-    let publicData = null
-    try {
-        const response = await fetch('/public/message')
-        if ( response.status !== 200 ){
-            console.log('Could not find server: ', response.status)
-            return
-        }
-        publicData = await response.json()
-        console.log('data from server ', publicData)
-    } catch(error) {
-        console.log('something whent wrong! ' + error.message)
-    }
-
-    chatHistory.innerHTML = ''
-
-    publicData.forEach(message => {
-
-        let li = document.createElement('li')
-        li.innerText = `${message.chatName} ${message.chatMessage}`
-        chatHistory.appendChild(li)
-        
-    })
-
-}
-
-startChatPublic.addEventListener('click', getMessage)
-
-
-
-
-/*chatInput2.addEventListener('keyup', event => {
-    let userText = chatInput2.value
-    if( userText.length > 0 ) {
-        addMessage.disabled = false
-    } else {
-        addMessage.disabled = true
-    }
-})
-
-*//*
-
-chatInput.addEventListener('keyup', event => {
-    let userText = chatInput.value
-    if( userText.length > 0 ) {
-        addMessage.disabled = false
-    } else {
-        addMessage.disabled = true
-    }
-})*/
-
-
-addMessage.addEventListener('click', async () => {
-const valueFromUser = chatInput.value
-    
-    const newMessage = {
-        chatName: userId() + " ",
-        chatMessage: valueFromUser,
-        id: nextMessageId
-    }
-    nextMessageId++
-
-    const element = createChatElement(newMessage)
-    chatHistory.appendChild(element)
-
-   
-})
-
 function createChatElement(newMessage) {
     const element = document.createElement('li')
     const label = document.createElement('label')
@@ -208,4 +181,17 @@ function createChatElement(newMessage) {
     label.appendChild(span).style.color = "black"
     element.appendChild(label)
     return element
+}
+
+function getFromLocalStorage() {
+	let maybeJson = localStorage.getItem(key)
+	if( !maybeJson ) {
+		return
+	}
+	try {
+		let actualData = JSON.parse(maybeJson)
+		return actualData
+	} catch {
+		return
+	}
 }
